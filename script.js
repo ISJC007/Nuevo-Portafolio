@@ -1,8 +1,5 @@
 const cuerpo = document.querySelector('body');
-
 const boton = document.querySelector('#modo-oscuro-btn');
-
-boton.addEventListener('click', alternarModoOscuro);
 
 function alternarModoOscuro() {
     cuerpo.classList.toggle('dark-mode');
@@ -12,7 +9,66 @@ function alternarModoOscuro() {
     } else {
         boton.textContent = 'Activar Modo Oscuro';
     }
+}
 
+if (boton) {
+    boton.addEventListener('click', alternarModoOscuro);
 }
 
 
+const audio = document.getElementById('background-audio');
+const audioBtn = document.getElementById('audio-toggle-btn');
+let isPlaying = false;
+
+if (audio && audioBtn) { 
+    audioBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            audioBtn.textContent = 'Reproducir Música';
+        } else {
+            audio.play().catch(error => {
+                console.error("No se pudo reproducir el audio automáticamente. Se requiere un primer clic del usuario.", error);
+            });
+            audioBtn.textContent = 'Pausar Música';
+        }
+        isPlaying = !isPlaying;
+    });
+}
+
+
+function getGreeting() {
+    const now = new Date();
+    const hour = now.getHours();
+    const subject = "Jefe/Jefa";
+    let timeOfDay = "";
+
+    if (hour >= 5 && hour < 12) {
+        timeOfDay = "días";
+    } else if (hour >= 12 && hour < 19) {
+        timeOfDay = "tardes";
+    } else {
+        timeOfDay = "noches";
+    }
+
+    return `Buenas ${timeOfDay}, ${subject}. ¡Bienvenido/a!`;
+}
+
+function handleLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const greetingMessage = document.getElementById('greeting-message');
+
+    if (!loadingScreen || !greetingMessage) return; 
+
+    greetingMessage.textContent = getGreeting();
+
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0'; 
+        
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 1000); 
+
+    }, 2000); 
+}
+
+window.addEventListener('load', handleLoadingScreen);

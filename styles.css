@@ -1,7 +1,23 @@
+:root {
+    --color-acento: #1a237e;
+    --color-secundario: #42a5f5;
+    --color-fondo-claro: #f4f4f9;
+    --color-fondo-principal: #ffffff;
+    --color-texto-principal: #444;
+    --color-texto-secundario: #666;
+}
+
+body.dark-mode {
+    --color-fondo-claro: #333333;
+    --color-fondo-principal: #1c1c1c;
+    --color-texto-principal: #e0e0e0;
+    --color-texto-secundario: #b0b0b0;
+}
+
 body {
-    background-color:#ffffff;
+    background-color: var(--color-fondo-principal);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #444;
+    color: var(--color-texto-principal);
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -9,52 +25,169 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 h1 {
-    color:#1a237e;
+    color: var(--color-acento);
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: center;
     font-weight: normal;
-    border-bottom: 2px solid #1a237e;
+    border-bottom: 2px solid var(--color-acento);
     padding-bottom: 10px;
     margin-bottom: 40px;
 }
 
 a {
-    color: white;
-    background-color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    display: inline-block;
-    transition: background-color 0.3s;
+    color: var(--color-secundario);
+    background-color: transparent;
+    text-decoration: underline;
+    font-weight: normal;
+    padding: 0;
+    display: inline;
+    transition: color 0.3s;
 }
 
 a:hover {
-    background-color: #0056be;
+    color: var(--color-acento);
+    opacity: 0.8;
 }
 
-.perfil-img {
-    display: block;
-    margin: 0 auto 30px auto;
+.perfil-card {
+    background-color: var(--color-fondo-claro); 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.perfil-info {
+    display: flex;
+    align-items: center; 
+    gap: 30px; 
+}
+
+.perfil-foto {
+    width: 150px; 
+    height: 150px;
     border-radius: 50%;
-    border: 5px solid #1a237e;
-    }
-
-.dark-mode {
-    background-color: #1c1c1c;
-    color: #e0e0e0;
+    object-fit: cover;
+    border: 4px solid var(--color-secundario); 
 }
 
-.dark-mode a {
-    color: #8be9fd;
-  }
+.titulo-profesional {
+    color: var(--color-acento); 
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
 
+.descripcion-corta {
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
 
+.enlaces-sociales {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
+.btn-social {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    color: white !important;
+}
 
+.linkedin {
+    background-color: #0077B5;
+}
+.github {
+    background-color: #333;
+}
+.cv {
+    background-color: var(--color-acento); 
+}
 
+.btn-social:hover {
+    transform: translateY(-2px); 
+    opacity: 0.9;
+}
 
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-fondo-principal); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+    opacity: 1;
+    transition: opacity 1s ease-out; 
+}
 
+.loader-content {
+    text-align: center;
+}
+
+.spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid var(--color-acento); 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite; 
+    margin: 0 auto 20px auto; 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#greeting-message {
+    color: var(--color-texto-principal);
+    margin-bottom: 5px;
+}
+
+.loader-content p {
+    color: var(--color-texto-secundario);
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0; 
+    margin: 40px 0;
+    width: 100%;
+}
+
+ul {
+    list-style-type: none; 
+    padding-left: 0; 
+    width: 100%;
+}
+
+ul li {
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+    text-align: left;
+}
+
+ul li::before {
+    content: "→"; 
+    color: var(--color-secundario); 
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}

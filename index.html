@@ -4,32 +4,60 @@
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Johander Cedeño</title>
+    <title>Portafolio de Johander Cedeño | Desarrollador Cloud Junior</title>
 </head>
 <body>
-    <h1>Johander José Cedeño Marin</h1>
-    <h2>Estudiante de Informática y Futuro Desarrollador Cloud</h2>
-    <img src="https://via.placeholder.com/150x150?text=Tu+Foto" alt="Foto de Perfil Profesional" class="perfil-img">
-    <button id="modo-oscuro-btn">Activar Modo Oscuro</button>
+    
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <h2 id="greeting-message">Cargando...</h2> 
+            <p>Preparando la infraestructura Cloud.</p>
+        </div>
+    </div>
+
+
+    <section id="sobre-mi" class="perfil-card">
+        <div class="perfil-info">
+            <img src="johander-perfil.jpg" alt="Foto de Perfil de Johander Cedeño" class="perfil-foto">
+            <div>
+                <h1>Johander Cedeño</h1>
+                <p class="titulo-profesional">T.S.U. en Informática | Desarrollador Cloud Junior</p>
+                <p class="descripcion-corta"> 
+                    Soy un desarrollador con enfoque en la eficiencia y la infraestructura en la nube (AWS). Apasionado por transformar problemas de negocio en soluciones escalables y de bajo costo utilizando JavaScript y lógica de sistemas.
+                </p>
+                
+                <div class="enlaces-sociales"> 
+                    <a href="https://www.linkedin.com/in/johander-cede%C3%B1o-3967a83a0/" target="_blank" class="btn-social linkedin">LinkedIn</a>
+                    <a href="https://github.com/ISJC007" target="_blank" class="btn-social github">GitHub</a>
+                    <a href="URL_DE_TU_CURRICULUM_PDF" target="_blank" class="btn-social cv">Descargar CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <hr>
+    
+    <h2>Proyectos Clave</h2>
+    <p>Estos proyectos demuestran mi capacidad para integrar lógica Front-end, APIs externas y, pronto, infraestructura de AWS.</p>
 
-    <h3>Contacto y Enlaces</h3>
-    <p>
-        Mi perfil de GitHub es donde alojo mi trabajo técnico.
-    </p>
-
-    <a href="https://github.com/ISJC007" target="_blank">Ver mis Proyectos en GitHub</a>
-    <hr>
-
-    <h3>Proyectos Clave</h3>
     <ul>
-        <li>Proyecto #1: Mi Simulador Financiero</li>
-        <li>Proyecto #2: Plan Piloto De Cría de Pollos</li>
-        <li>Proyecto #3: Aplicacion de Clima con API</li>
+        <li>Proyecto #1: Mi Simulador Financiero (Próximamente con DynamoDB)</li>
+        <li>Proyecto #2: Plan Piloto De Cría de Pollos (Lógica JS)</li>
+        <li>Proyecto #3: Aplicación de Clima con API (Conexión a servicios externos)</li>
     </ul>
 
+    <hr>
+    
+    <button id="modo-oscuro-btn">Activar Modo Oscuro</button>
+
     <script src="script.js"></script>
+
+    <audio id="background-audio" loop>
+        <source src="URL_DE_TU_MUSICA.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <button id="audio-toggle-btn" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000; padding: 10px; background-color: var(--color-secundario); color: white; border: none; border-radius: 5px; cursor: pointer;">Reproducir Música</button>
 
 </body>
 </html>
