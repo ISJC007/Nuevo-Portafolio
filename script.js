@@ -71,4 +71,80 @@ function handleLoadingScreen() {
     }, 2000); 
 }
 
+
+const climaResultado = document.getElementById('clima-resultado');
+const ciudadInput = document.getElementById('ciudad-input');
+const buscarBtn = document.getElementById('buscar-clima-btn');
+
+const API_KEY = "b8a11e8ad98a60e8980efd21daec4637"; 
+const BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
+const UNITS = "metric"; 
+
+function displayClima(data) {
+    if (data.cod === "404") {
+        climaResultado.innerHTML = `<h4>Error:</h4><p>Ciudad no encontrada. Por favor, verifica el nombre.</p>`;
+        return;
+    }
+
+    if (data.cod === 401 || data.message === "Invalid API key") {
+         climaResultado.innerHTML = `<h4>Error de Clave API (401):</h4><p>La clave de OpenWeatherMap es inválida. Revisa tu consola para más detalles.</p>`;
+         return;
+    }
+
+    const tempCelsius = Math.round(data.main.temp);
+    const descripcion = data.weather[0].description;
+    const ciudad = data.name;
+    const pais = data.sys.country;
+    const humedad = data.main.humidity;
+
+    climaResultado.innerHTML = `
+        <h4>Clima en ${ciudad}, ${pais}:</h4>
+        <p>Temperatura: <strong>${tempCelsius}°C</strong></p>
+        <p>Condición: ${descripcion.charAt(0).toUpperCase() + descripcion.slice(1)}</p>
+        <p>Humedad: ${humedad}%</p>
+    `;
+}
+
+async function buscarClima() {
+    const ciudad = ciudadInput.value.trim();
+
+    if (ciudad === "") {
+        climaResultado.innerHTML = "<p>Por favor, introduce el nombre de una ciudad.</p>";
+        return;
+    }
+    
+    climaResultado.innerHTML = "<p>Buscando datos del clima...</p>";
+
+    try {
+        const url = `${BASE_URL}${ciudad}&units=${UNITS}&appid=${API_KEY}`;
+        
+        const response = await fetch(url); 
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            displayClima(data); 
+            return;
+        }
+
+        displayClima(data);
+
+    } catch (error) {
+        console.error("Error al obtener el clima:", error);
+        climaResultado.innerHTML = `<h4>Error de Conexión:</h4><p>No se pudo contactar con el servicio de clima. ¿Estás conectado a internet?</p>`;
+    }
+}
+
 window.addEventListener('load', handleLoadingScreen);
+
+if (buscarBtn) {
+    buscarBtn.addEventListener('click', buscarClima);
+}
+
+if (ciudadInput) {
+    ciudadInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            buscarClima();
+        }
+    });
+}

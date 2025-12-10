@@ -295,4 +295,12 @@ ul li::before {
         max-width: 300px;
         margin: 0 auto;
     }
+
+    .clima-card {
+        padding: 20px;
+    }
+    
+    #ciudad-input, #buscar-clima-btn {
+        font-size: 0.9em;
+    }
 }
