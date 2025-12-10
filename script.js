@@ -16,25 +16,30 @@ if (boton) {
 }
 
 
+// ==========================================================
+// 2. LÓGICA DEL AUDIO (Modo Clásico)
+// ==========================================================
 const audio = document.getElementById('background-audio');
 const audioBtn = document.getElementById('audio-toggle-btn');
 let isPlaying = false;
 
 if (audio && audioBtn) { 
+    // Texto Inicial: Modo Clásico (no lo cambies en el if/else)
+    audioBtn.textContent = 'Modo Clásico (OFF)'; 
+    
     audioBtn.addEventListener('click', () => {
         if (isPlaying) {
             audio.pause();
-            audioBtn.textContent = 'Reproducir Música';
+            audioBtn.textContent = 'Modo Clásico (OFF)';
         } else {
             audio.play().catch(error => {
-                console.error("No se pudo reproducir el audio automáticamente. Se requiere un primer clic del usuario.", error);
+                console.error("No se pudo reproducir el audio automáticamente.", error);
             });
-            audioBtn.textContent = 'Pausar Música';
+            audioBtn.textContent = 'Modo Clásico (ON)';
         }
         isPlaying = !isPlaying;
     });
 }
-
 
 function getGreeting() {
     const now = new Date();

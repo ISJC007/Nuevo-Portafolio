@@ -49,15 +49,23 @@
 
     <hr>
     
-    <button id="modo-oscuro-btn">Activar Modo Oscuro</button>
+    <section class="config-box">
+        <h3>Ajustes de Interfaz</h3>
+        <p>Optimiza la visualización y controla la atmósfera de la página.</p>
+        
+        <div class="config-botones-wrapper">
+            <button id="modo-oscuro-btn" class="config-btn">Activar Modo Oscuro</button>
+
+            <button id="audio-toggle-btn" class="config-btn">Modo Clásico</button> 
+        </div>
+    </section>
 
     <script src="script.js"></script>
 
     <audio id="background-audio" loop>
-        <source src="URL_DE_TU_MUSICA.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-small-drum-roll-3023.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
-    <button id="audio-toggle-btn" style="position: fixed; bottom: 10px; right: 10px; z-index: 1000; padding: 10px; background-color: var(--color-secundario); color: white; border: none; border-radius: 5px; cursor: pointer;">Reproducir Música</button>
 
 </body>
 </html>
