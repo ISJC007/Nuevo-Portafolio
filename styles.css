@@ -1,6 +1,6 @@
 :root {
-    --color-acento: #1a237e;
-    --color-secundario: #42a5f5;
+    --color-acento: #1a237e; 
+    --color-secundario: #42a5f5; 
     --color-fondo-claro: #f4f4f9;
     --color-fondo-principal: #ffffff;
     --color-texto-principal: #333333; 
@@ -197,7 +197,7 @@ ul li::before {
 
 .config-box {
     background-color: var(--color-fondo-claro); 
-    border: 1px solid var(--color-marco-foto); 
+    border: 1px solid var(--color-marco-foto);
     padding: 25px;
     border-radius: 10px;
     margin-top: 20px;
@@ -214,21 +214,6 @@ ul li::before {
 .config-box p {
     color: var(--color-texto-secundario);
     margin-bottom: 20px;
-}
-
-#modo-oscuro-btn {
-    background-color: var(--color-secundario);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-#modo-oscuro-btn:hover {
-    background-color: #0056be;
 }
 
 .config-botones-wrapper {
@@ -256,8 +241,58 @@ ul li::before {
 }
 
 #audio-toggle-btn {
-    background-color: #5cb85c;
+    background-color: #5cb85c; 
 }
 #audio-toggle-btn:hover {
     background-color: #449d44;
+}
+
+@media (max-width: 768px) {
+    .perfil-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .perfil-foto {
+        width: 120px; 
+        height: 120px;
+        margin-bottom: 10px;
+    }
+
+    .titulo-profesional {
+        font-size: 1em;
+    }
+
+    .enlaces-sociales {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .descripcion-corta {
+        font-size: 0.95em;
+    }
+
+    body {
+        padding: 15px;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+    
+    .config-box {
+        padding: 20px 15px;
+    }
+
+    .config-botones-wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .config-btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
 }

@@ -15,16 +15,11 @@ if (boton) {
     boton.addEventListener('click', alternarModoOscuro);
 }
 
-
-// ==========================================================
-// 2. LÓGICA DEL AUDIO (Modo Clásico)
-// ==========================================================
 const audio = document.getElementById('background-audio');
 const audioBtn = document.getElementById('audio-toggle-btn');
 let isPlaying = false;
 
 if (audio && audioBtn) { 
-    // Texto Inicial: Modo Clásico (no lo cambies en el if/else)
     audioBtn.textContent = 'Modo Clásico (OFF)'; 
     
     audioBtn.addEventListener('click', () => {
