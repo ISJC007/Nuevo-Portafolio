@@ -65,6 +65,32 @@
     </section>
     <hr>
     
+    <section id="simulador-financiero-app">
+        <h2>Simulador Financiero (Próximo: DynamoDB)</h2>
+        <p class="descripcion-corta">
+            Herramienta de proyección financiera que implementará lógica de negocio compleja y persistencia de datos en **AWS DynamoDB**.
+        </p>
+
+        <div class="simulador-card">
+            <label for="inversion-inicial">Inversión Inicial ($):</label>
+            <input type="number" id="inversion-inicial" value="1000" min="100">
+
+            <label for="tasa-mensual">Tasa de Crecimiento Mensual (%):</label>
+            <input type="number" id="tasa-mensual" value="5" min="1" max="100">
+            
+            <label for="meses-proyeccion">Meses de Proyección:</label>
+            <input type="number" id="meses-proyeccion" value="12" min="1" max="60">
+
+            <button id="calcular-btn" class="btn-calculo">Calcular Proyección</button>
+            <button id="guardar-btn" class="btn-guardar" disabled>Guardar en Cloud (AWS)</button>
+
+            <div id="simulador-resultado">
+                <p>Presiona 'Calcular' para ver la ganancia proyectada.</p>
+            </div>
+        </div>
+    </section>
+    <hr>
+    
     <section class="config-box">
         <h3>Ajustes de Interfaz</h3>
         <p>Optimiza la visualización y controla la atmósfera de la página.</p>
