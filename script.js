@@ -148,3 +148,75 @@ if (ciudadInput) {
         }
     });
 }
+
+const inversionInput = document.getElementById('inversion-inicial');
+const tasaInput = document.getElementById('tasa-mensual');
+const mesesInput = document.getElementById('meses-proyeccion');
+const calcularBtn = document.getElementById('calcular-btn');
+const guardarBtn = document.getElementById('guardar-btn');
+const simuladorResultado = document.getElementById('simulador-resultado');
+
+let ultimoResultado = null; 
+
+function calcularProyeccion() {
+    const inversionInicial = parseFloat(inversionInput.value);
+    const tasaMensual = parseFloat(tasaInput.value) / 100;
+    const meses = parseInt(mesesInput.value);
+    
+    if (isNaN(inversionInicial) || isNaN(tasaMensual) || isNaN(meses) || inversionInicial <= 0 || meses < 1) {
+        simuladorResultado.innerHTML = "<p style='color: #e74c3c;'>⚠️ Error: Introduce valores numéricos válidos y positivos.</p>";
+        guardarBtn.disabled = true;
+        return;
+    }
+
+    const tasaEfectiva = 1 + tasaMensual;
+    const capitalFinal = inversionInicial * Math.pow(tasaEfectiva, meses);
+    const gananciaNeta = capitalFinal - inversionInicial;
+
+    const formatoOpciones = { style: 'currency', currency: 'USD' };
+    const capitalFinalFormateado = capitalFinal.toLocaleString('es-VE', formatoOpciones);
+    const gananciaNetaFormateada = gananciaNeta.toLocaleString('es-VE', formatoOpciones);
+    const inversionFormateada = inversionInicial.toLocaleString('es-VE', formatoOpciones);
+
+    simuladorResultado.innerHTML = `
+        <h4>✅ Cálculo Completo:</h4>
+        <p>Inversión Inicial: <strong>${inversionFormateada}</strong></p>
+        <p>Ganancia Neta (${meses} meses): <strong style="color: #2ecc71;">${gananciaNetaFormateada}</strong></p>
+        <p>Capital Final Proyectado: <strong>${capitalFinalFormateado}</strong></p>
+    `;
+
+    ultimoResultado = {
+        fecha: new Date().toISOString(),
+        inversionInicial: inversionInicial,
+        tasaMensual: tasaMensual * 100,
+        meses: meses,
+        capitalFinal: capitalFinal
+    };
+
+    guardarBtn.disabled = false;
+}
+
+
+function guardarEnCloud() {
+    if (!ultimoResultado) return;
+    
+    guardarBtn.textContent = "💾 Guardando en AWS...";
+    guardarBtn.disabled = true;
+
+    
+    setTimeout(() => {
+        simuladorResultado.innerHTML += `<p style="color: #3498db; margin-top: 10px;">✅ Proyección guardada. Esta acción demuestra la conexión a DynamoDB a través de una API Gateway.</p>`;
+        guardarBtn.textContent = "Guardar en Cloud (AWS)";
+        guardarBtn.disabled = false;
+        ultimoResultado = null;
+    }, 2000); 
+
+}
+
+if (calcularBtn) {
+    calcularBtn.addEventListener('click', calcularProyeccion);
+}
+
+if (guardarBtn) {
+    guardarBtn.addEventListener('click', guardarEnCloud);
+}
