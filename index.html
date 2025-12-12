@@ -1,113 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Johander Cedeño | Desarrollador Cloud Junior</title>
+    <title>Johander Cedeño - Desarrollador JavaScript & AWS Serverless</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="icon" type="image/png" href="favicon.png"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
 </head>
 <body>
     
     <div id="loading-screen">
         <div class="loader-content">
-            <div class="spinner"></div>
-            <h2 id="greeting-message">Cargando...</h2> 
-            <p>Preparando la infraestructura Cloud.</p>
+            <div class="loader-spinner"></div> 
+            <h2 id="greeting-message">Cargando experiencia...</h2>
+            <p>Johander Cedeño | Serverless Developer</p>
         </div>
     </div>
-
-
-    <section id="sobre-mi" class="perfil-card">
-        <div class="perfil-info">
-            <img src="johander-perfil.jpg" alt="Foto de Perfil de Johander Cedeño" class="perfil-foto">
-            <div>
-                <h1>Johander Cedeño</h1>
-                <p class="titulo-profesional">T.S.U. en Informática | Desarrollador Cloud Junior</p>
-                <p class="descripcion-corta"> 
-                    Soy un desarrollador con enfoque en la eficiencia y la infraestructura en la nube (AWS). Apasionado por transformar problemas de negocio en soluciones escalables y de bajo costo utilizando JavaScript y lógica de sistemas.
-                </p>
-                
-                <div class="enlaces-sociales"> 
-                    <a href="https://www.linkedin.com/in/johander-cede%C3%B1o-3967a83a0/" target="_blank" class="btn-social linkedin">LinkedIn</a>
-                    <a href="https://github.com/ISJC007" target="_blank" class="btn-social github">GitHub</a>
-                    <a href="URL_DE_TU_CURRICULUM_PDF" target="_blank" class="btn-social cv">Descargar CV</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr>
     
-    <h2>Proyectos Clave</h2>
-    <p>Estos proyectos demuestran mi capacidad para integrar lógica Front-end, APIs externas y, pronto, infraestructura de AWS.</p>
-
-    <ul>
-        <li>Proyecto #1: Mi Simulador Financiero (Próximamente con DynamoDB)</li>
-        <li>Proyecto #2: Plan Piloto De Cría de Pollos (Lógica JS)</li>
-        <li>Proyecto #3: Aplicación de Clima con API (Conexión a servicios externos)</li>
-    </ul>
-
-    <section id="clima-app">
-        <h2>App de Consulta de Clima</h2>
-        <p class="descripcion-corta">
-            Demo de integración con APIs externas para obtener datos en tiempo real. 
-            Este front-end está desplegado en un bucket de AWS S3.
-        </p>
-
-        <div class="clima-card">
-            <input type="text" id="ciudad-input" placeholder="Introduce una ciudad (Ej: Caracas, Madrid, Tokyo)">
-            <button id="buscar-clima-btn">Buscar Clima</button>
-
-            <div id="clima-resultado">
-                <p>Busca el clima para ver los resultados...</p>
-            </div>
-        </div>
-    </section>
-    <hr>
-    
-    <section id="simulador-financiero-app">
-        <h2>Simulador Financiero (Próximo: DynamoDB)</h2>
-        <p class="descripcion-corta">
-            Herramienta de proyección financiera que implementará lógica de negocio compleja y persistencia de datos en **AWS DynamoDB**.
-        </p>
-
-        <div class="simulador-card">
-            <label for="inversion-inicial">Inversión Inicial ($):</label>
-            <input type="number" id="inversion-inicial" value="1000" min="100">
-
-            <label for="tasa-mensual">Tasa de Crecimiento Mensual (%):</label>
-            <input type="number" id="tasa-mensual" value="5" min="1" max="100">
-            
-            <label for="meses-proyeccion">Meses de Proyección:</label>
-            <input type="number" id="meses-proyeccion" value="12" min="1" max="60">
-
-            <button id="calcular-btn" class="btn-calculo">Calcular Proyección</button>
-            <button id="guardar-btn" class="btn-guardar" disabled>Guardar en Cloud (AWS)</button>
-
-            <div id="simulador-resultado">
-                <p>Presiona 'Calcular' para ver la ganancia proyectada.</p>
-            </div>
-        </div>
-    </section>
-    <hr>
-    
-    <section class="config-box">
-        <h3>Ajustes de Interfaz</h3>
-        <p>Optimiza la visualización y controla la atmósfera de la página.</p>
+    <div class="container">
         
-        <div class="config-botones-wrapper">
-            <button id="modo-oscuro-btn" class="config-btn">Activar Modo Oscuro</button>
+        <header class="header">
+            
+            <div class="header-top">
+                <img src="logo.png" alt="Logo de Johander Cedeño (ISJC)" class="personal-logo">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+                    <i class="fas fa-lightbulb"></i> 
+                </button>
+            </div>
+            
+            <img src="johander-perfil.jpg" alt="Foto de Perfil de Johander" class="profile-img">
+            <h1>JOHANDER CEDEÑO</h1>
+            <p class="headline">JavaScript Developer | AWS Serverless Planning & API Integration</p>
+        </header>
 
-            <button id="audio-toggle-btn" class="config-btn">Modo Clásico</button> 
-        </div>
-    </section>
+        <hr class="separator">
 
+        <section class="biography">
+            <h2>Mi Propuesta de Valor</h2>
+            <p>
+                Desarrollador Junior altamente motivado y enfocado en la Arquitectura en la Nube y la eficiencia del sistema. A pesar de mi reciente comienzo, mi disciplina me permite transformar problemas de negocio en soluciones funcionales rápidamente y con una "mentalidad sin servidor (Serverless)".
+            </p>
+            
+            <ul class="skills-list">
+                <li>Arquitectura Cloud-Ready: Planificación de la arquitectura para persistencia de datos con AWS DynamoDB (NoSQL) y despliegue de front-end escalable en "AWS S3".</li>
+                <li>Integración de Sistemas (API): Competencia en el consumo e integración de API REST (demostrado en la aplicación Weather) y manejo proactivo de errores (401/404).</li>
+                <li>Desarrollo Front-End: Experiencia avanzada en JavaScript (ES6+), HTML5/CSS3 y diseño responsivo.</li>
+            </ul>
+
+            <p class="commitment">Mi compromiso es la comunicación constante, la entrega rápida y la optimización de costos para el cliente.</p>
+        </section>
+
+        <hr class="separator">
+        
+        <section class="projects">
+            <h2>Proyectos Clave</h2>
+
+            <div class="proyectos-grid">
+                
+                <div class="proyecto-card">
+                    <h3>Simulador Financiero</h3>
+                    <p>Lógica de interés compuesto. Diseñado para guardar resultados en AWS DynamoDB.</p>
+                    <img src="imagen-simulador.png" alt="Captura de pantalla del simulador financiero" class="proyecto-img">
+                    <a href="#simulador-financiero-app" class="btn-proyecto" data-sound="click-sound">Ver Demo</a>
+                </div>
+                
+                <div class="proyecto-card">
+                    <h3>App de Consulta de Clima</h3>
+                    <p>Consumo de APIs REST, manejo de errores y despliegue en "AWS S3".</p>
+                    <img src="imagen-clima.png" alt="Captura de pantalla de la app de clima" class="proyecto-img">
+                    <a href="#clima-app" class="btn-proyecto" data-sound="click-sound">Ver Demo</a>
+                </div>
+                
+                <div class="proyecto-card video-presentacion">
+                    <h3>Presentación y Soft Skills</h3>
+                    <p>Mi concepto sobre el "Capital Humano" y mi potencial en la arquitectura Cloud.</p>
+                    <iframe width="100%" height="auto" src="https://drive.google.com/file/d/14tUWwZPgA9RgkiBnZDqBbbdDSc_93y0D/view?usp=drivesdk" title="Video de Presentación de Johander" frameborder="0" allowfullscreen></iframe>
+                    <a href="https://drive.google.com/file/d/10QwjM-YCu3FiZZuGKXz0lusAqqGBVk1Y/view?usp=drivesdk" target="_blank" class="btn-proyecto cv-link" data-sound="click-sound">Descargar CV</a>
+                </div>
+                
+            </div>
+        </section>
+
+        <hr class="separator">
+        
+        <section class="app-section" id="simulador-financiero-app">
+            <h2>Simulador de Interés Compuesto</h2>
+            <p class="sub-heading">Demostración de lógica de negocio y arquitectura Serverless.</p>
+            
+            <div class="app-inputs">
+                <label for="inversion-inicial">Inversión Inicial ($):</label>
+                <input type="number" id="inversion-inicial" placeholder="Ej: 1000" min="1" required>
+
+                <label for="tasa-mensual">Tasa de Interés Mensual (%):</label>
+                <input type="number" id="tasa-mensual" placeholder="Ej: 3" min="0.1" step="0.1" required>
+
+                <label for="meses-proyeccion">Meses de Proyección:</label>
+                <input type="number" id="meses-proyeccion" placeholder="Ej: 36" min="1" required>
+
+                <button id="calcular-btn" class="btn-proyecto" data-sound="click-sound">Calcular Proyección</button>
+            </div>
+            
+            <div class="app-result" id="simulador-resultado">
+                <p>Introduce los datos para calcular la proyección.</p>
+            </div>
+            
+            <button id="guardar-btn" class="btn-proyecto cv-link" disabled data-sound="click-sound">Guardar en Cloud (AWS)</button>
+            
+            <button class="btn-proyecto close-app-btn" data-target="#simulador-financiero-app" data-sound="click-sound">Cerrar Proyecto</button>
+        </section>
+
+        <hr class="separator">
+        
+        <section class="app-section" id="clima-app">
+            <h2>App de Consulta de Clima</h2>
+            <p class="sub-heading">Integración de API REST (OpenWeatherMap) y manejo de errores (404/401).</p>
+            
+            <div class="app-inputs">
+                <label for="ciudad-input">Ciudad a Consultar:</label>
+                <input type="text" id="ciudad-input" placeholder="Ej: Caracas o Miami" required>
+                <button id="buscar-clima-btn" class="btn-proyecto" data-sound="click-sound">Buscar Clima</button>
+            </div>
+            
+            <div class="app-result" id="clima-resultado">
+                <p>Introduce el nombre de una ciudad para obtener el clima.</p>
+            </div>
+            
+            <button class="btn-proyecto close-app-btn" data-target="#clima-app" data-sound="click-sound">Cerrar Proyecto</button>
+        </section>
+
+        <hr class="separator">
+        
+        <section class="contact-study">
+            <h2>Contacto y Redes Profesionales</h2>
+            
+            <div class="social-links-grid">
+                <a href="https://www.linkedin.com/in/johander-cede%C3%b1o-3967a83a0/" target="_blank" class="social-btn linkedin" data-sound="click-sound">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+                <a href="https://github.com/ISJC007" target="_blank" class="social-btn github" data-sound="click-sound">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+
+                <a href="https://wa.me/584248466139" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" data-sound="click-sound">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61581695453697" target="_blank" class="social-btn facebook" data-sound="click-sound">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+                <a href="https://www.instagram.com/johander_cedeno?igsh=ejJkNHMyMHVpOXlp" target="_blank" class="social-btn instagram" data-sound="click-sound">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+
+            <p class="study-info">
+                T.S.U. en Informática: Estudios enfocados en Lógica de Sistemas y Bases de Datos. (En Curso / Graduación Estimada: 2027)
+            </p>
+        </section>
+
+    </div>  
     <script src="script.js"></script>
-
-    <audio id="background-audio" loop>
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-small-drum-roll-3023.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
 
 </body>
 </html>
