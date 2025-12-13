@@ -112,20 +112,11 @@ function setupClimaApp() {
     var ciudadInput = document.getElementById('ciudad-input');
     var buscarBtn = document.getElementById('buscar-clima-btn');
 
-    var API_KEY = "b8a11e8ad98a60e8980efd21daec4637"; // <-- ¡REEMPLAZA ESTA CLAVE SI FALLA!
-    var BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
-    var UNITS = "metric"; 
-
     function displayClima(data) {
         if (!climaResultado) return; 
 
         if (data.cod === "404") {
             climaResultado.innerHTML = "<h4>Error:</h4><p>Ciudad no encontrada. Por favor, verifica el nombre.</p>";
-            return;
-        }
-
-        if (data.cod === 401 || data.message === "Invalid API key") {
-            climaResultado.innerHTML = "<h4>Error de Clave API (401):</h4><p>La clave de OpenWeatherMap es inválida. Revisa tu consola para más detalles.</p>";
             return;
         }
 
@@ -152,21 +143,21 @@ function setupClimaApp() {
         
         climaResultado.innerHTML = "<p>Buscando datos del clima...</p>";
 
-        var url = BASE_URL + ciudad + "&units=" + UNITS + "&appid=" + API_KEY;
+        var proxyUrl = `/.netlify/functions/get-weather?city=${ciudad}`;
         
-        fetch(url)
+        fetch(proxyUrl)
             .then(function(response) {
                 return response.json().then(function(data) {
                     if (!response.ok) {
-                        displayClima(data);
-                        return;
+                        displayClima(data); 
+                        return Promise.reject(new Error('Fallo en la función proxy'));
                     }
                     displayClima(data);
                 });
             })
             .catch(function(error) {
                 console.error("Error al obtener el clima:", error);
-                climaResultado.innerHTML = "<h4>Error de Conexión:</h4><p>No se pudo contactar con el servicio de clima. ¿Estás conectado a internet?</p>";
+                climaResultado.innerHTML = "<h4>Error de Conexión:</h4><p>No se pudo contactar con el servidor. Verifica tu internet o la configuración de Netlify.</p>";
             });
     }
 
@@ -181,8 +172,7 @@ function setupClimaApp() {
             }
         });
     }
-} 
-
+}
 function setupSimuladorApp() {
     var inversionInput = document.getElementById('inversion-inicial');
     var tasaInput = document.getElementById('tasa-mensual');
