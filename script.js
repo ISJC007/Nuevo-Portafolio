@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function getGreeting() {
     var now = new Date();
     var hour = now.getHours();
-    var subject = "Jefe/Jefa"; 
+    var subject = "Jefe"; 
     var timeOfDay = "";
 
     if (hour >= 5 && hour < 12) {
@@ -76,7 +76,7 @@ function getGreeting() {
     } else {
         timeOfDay = "noches";
     }
-    return "Buenas " + timeOfDay + ", " + subject + ". ¡Bienvenido/a!";
+    return "Buenas " + timeOfDay + " " + subject + ". ¡Bienvenido/a!";
 }
 
 function handleLoadingScreen() {
