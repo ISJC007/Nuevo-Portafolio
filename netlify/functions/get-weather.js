@@ -1,4 +1,4 @@
-const API_KEY = process.env.OPENWEATHER_API_KEY; 
+'use strict';
 
 exports.handler = async (event) => {
   const city = event.queryStringParameters.city || 'Caracas';
