@@ -1,6 +1,3 @@
-
-const fetch = require('node-fetch');
-
 const API_KEY = process.env.OPENWEATHER_API_KEY; 
 
 exports.handler = async (event) => {
