@@ -1,5 +1,3 @@
-'use strict';
-
 exports.handler = async (event) => {
   const city = event.queryStringParameters.city || 'Caracas';
 
