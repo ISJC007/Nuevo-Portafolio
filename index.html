@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Johander Cedeño - Desarrollador JavaScript & AWS Serverless</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/CSS/styles.css">
     
-    <link rel="icon" type="image/png" href="favicon.png"> 
+    <link rel="icon" type="image/png" href="assets/Image/favicon.png"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
 </head>
 <body>
@@ -24,13 +24,13 @@
         <header class="header">
             
             <div class="header-top">
-                <img src="logo.png" alt="Logo de Johander Cedeño (ISJC)" class="personal-logo">
+                <img src="assets/Image/logo.png" alt="Logo de Johander Cedeño (ISJC)" class="personal-logo">
                 <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
                     <i class="fas fa-lightbulb"></i> 
                 </button>
             </div>
             
-            <img src="johander-perfil.jpg" alt="Foto de Perfil de Johander" class="profile-img">
+            <img src="assets/Image/johander-perfil.jpg" alt="Foto de Perfil de Johander" class="profile-img">
             <h1>JOHANDER CEDEÑO</h1>
             <p class="headline">JavaScript Developer | AWS Serverless Planning & API Integration</p>
         </header>
@@ -62,14 +62,14 @@
                 <div class="proyecto-card">
                     <h3>Simulador Financiero</h3>
                     <p>Lógica de interés compuesto. Diseñado para guardar resultados en AWS DynamoDB.</p>
-                    <img src="imagen-simulador.png" alt="Captura de pantalla del simulador financiero" class="proyecto-img">
+                    <img src="assets/Image/imagen-simulador.png" alt="Captura de pantalla del simulador financiero" class="proyecto-img">
                     <a href="#simulador-financiero-app" class="btn-proyecto">Ver Demo</a>
                 </div>
                 
                 <div class="proyecto-card">
                     <h3>App de Consulta de Clima</h3>
                     <p>Consumo de APIs REST, manejo de errores y despliegue en "AWS S3".</p>
-                    <img src="imagen-clima.png" alt="Captura de pantalla de la app de clima" class="proyecto-img">
+                    <img src="assets/Image/imagen-clima.png" alt="Captura de pantalla de la app de clima" class="proyecto-img">
                     <a href="#clima-app" class="btn-proyecto">Ver Demo</a>
                 </div>
                 
@@ -99,7 +99,7 @@
                 <label for="meses-proyeccion">Meses de Proyección:</label>
                 <input type="number" id="meses-proyeccion" placeholder="Ej: 36" min="1" required>
 
-                <button id="calcular-btn" class="btn-proyecto" data-sound="click-sound">Calcular Proyección</button>
+                <button id="calcular-btn" class="btn-proyecto">Calcular Proyección</button>
             </div>
             
             <div class="app-result" id="simulador-resultado">
@@ -151,8 +151,8 @@
 
     </div>  
 
-    <script src="simulador.js"></script>
-<script src="script.js"></script>
+    <script src="assets/JS/simulador.js"></script>
+<script src="assets/JS/script.js"></script>
 
 </body>
 </html>
