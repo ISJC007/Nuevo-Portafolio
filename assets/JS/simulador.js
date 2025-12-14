@@ -1,10 +1,12 @@
+let isSaving = false;
+
 function setupSimuladorApp() {
-    var inversionInput = document.getElementById('inversion-inicial');
-    var tasaInput = document.getElementById('tasa-mensual');
-    var mesesInput = document.getElementById('meses-proyeccion');
-    var calcularBtn = document.getElementById('calcular-btn');
-    var guardarBtn = document.getElementById('guardar-btn');
-    var simuladorResultado = document.getElementById('simulador-resultado');
+    var inversionInput = document.getElementById('inversionInicial'); 
+    var tasaInput = document.getElementById('tasaMensual');       
+    var mesesInput = document.getElementById('mesesProyeccion');    
+    var calcularBtn = document.getElementById('calcularBtn');     
+    var guardarBtn = document.getElementById('guardarBtn');       
+    var simuladorResultado = document.getElementById('simuladorResultado'); 
 
     var ultimoResultado = null; 
 
@@ -49,18 +51,20 @@ function setupSimuladorApp() {
 
 
     function guardarEnCloud() {
-        if (!ultimoResultado || !simuladorResultado || !guardarBtn) return;
+        if (!ultimoResultado || !simuladorResultado || !guardarBtn || isSaving) return;
         
+        isSaving = true; 
         guardarBtn.textContent = "💾 Guardando en AWS...";
         guardarBtn.disabled = true;
 
         setTimeout(function() {
             simuladorResultado.innerHTML += "<p style='color: #3498db; margin-top: 10px;'>✅ Proyección guardada. Esta acción demuestra la conexión a DynamoDB a través de una API Gateway.</p>";
+            
             guardarBtn.textContent = "Guardar en Cloud (AWS)";
             guardarBtn.disabled = false;
+            isSaving = false; 
             ultimoResultado = null;
         }, 2000); 
-
     }
 
     if (calcularBtn) {
