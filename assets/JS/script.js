@@ -107,9 +107,9 @@ function handleLoadingScreen() {
 window.addEventListener('load', handleLoadingScreen); 
 
 function setupClimaApp() {
-    var climaResultado = document.getElementById('clima-resultado');
-    var ciudadInput = document.getElementById('ciudad-input');
-    var buscarBtn = document.getElementById('buscar-clima-btn');
+     var climaResultado = document.getElementById('clima-resultado');
+     var ciudadInput = document.getElementById('ciudad-input');
+     var buscarBtn = document.getElementById('buscarClimaBtn');
 
     function displayClima(data) {
         if (!climaResultado) return; 
