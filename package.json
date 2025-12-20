@@ -1,0 +1,9 @@
+{
+  "name": "nuevo-portafolio",
+  "version": "1.0.0",
+  "description": "Portafolio de Johander Cedeño",
+  "main": "index.html",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
