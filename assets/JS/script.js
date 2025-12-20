@@ -127,7 +127,7 @@ const statusMsg = document.getElementById('form-status');
 
 if (contactForm) {
   contactForm.addEventListener("submit", function(e) {
-    e.preventDefault();
+    e.preventDefault(); 
     
     statusMsg.textContent = "Enviando mensaje...";
     statusMsg.style.color = "var(--color-acento)";
@@ -139,15 +139,19 @@ if (contactForm) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString(),
     })
-    .then(() => {
-      statusMsg.textContent = "✅ ¡Mensaje enviado con éxito, Jefe!";
-      statusMsg.style.color = "#2ecc71"; 
-      contactForm.reset();
-      setTimeout(() => { statusMsg.textContent = ""; }, 5000);
+    .then(response => {
+      if (response.ok) {
+        statusMsg.textContent = "✅ ¡Mensaje enviado con éxito, Jefe!";
+        statusMsg.style.color = "#2ecc71";
+        contactForm.reset();
+        setTimeout(() => { statusMsg.textContent = ""; }, 5000);
+      } else {
+        throw new Error();
+      }
     })
     .catch(() => {
       statusMsg.textContent = "❌ Error al enviar. Intenta de nuevo.";
-      statusMsg.style.color = "#e74c3c"; 
+      statusMsg.style.color = "#e74c3c";
     });
   });
 }

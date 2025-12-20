@@ -152,11 +152,13 @@
                 </p>
             </section>
 
-         <section class="cta-section">
+        <section class="cta-section">
     <h2>¿Listo para escalar tu próximo proyecto?</h2>
     <p>Envíame un mensaje y me pondré en contacto contigo a la brevedad.</p>
     
     <form name="contacto-portafolio" method="POST" data-netlify="true" class="contact-form">
+        <input type="hidden" name="form-name" value="contacto-portafolio" />
+        
         <div class="form-group">
             <input type="text" name="nombre" placeholder="Tu Nombre" required>
         </div>
@@ -166,8 +168,9 @@
         <div class="form-group">
             <textarea name="mensaje" rows="5" placeholder="¿En qué puedo ayudarte?" required></textarea>
         </div>
-        <button type="submit" target="_blank" class="btn-cta">Enviar Mensaje</button>
-        <div id="form-status" class="form-status-msg"></div>
+        <button type="submit" class="btn-cta">Enviar Mensaje</button>
+        
+        <div id="form-status" style="margin-top: 15px; font-weight: bold;"></div>
     </form>
 </section>
     
