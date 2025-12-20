@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
     function openProject(event) {
         event.preventDefault(); 
         var targetId = event.currentTarget.getAttribute('href'); 
@@ -56,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     setupClimaApp();
+    setupContacto();
 }); 
 
 function getGreeting() {
@@ -69,7 +69,6 @@ function getGreeting() {
 function handleLoadingScreen() {
     var loadingScreen = document.getElementById('loading-screen');
     var greetingMessage = document.getElementById('greeting-message');
-
     if (!loadingScreen || !greetingMessage) return; 
 
     setTimeout(function() {
@@ -83,9 +82,9 @@ function handleLoadingScreen() {
 window.addEventListener('load', handleLoadingScreen); 
 
 function setupClimaApp() {
-     var climaResultado = document.getElementById('climaResultado'); 
-     var ciudadInput = document.getElementById('ciudadInput');       
-     var buscarBtn = document.getElementById('buscarClimaBtn');
+    var climaResultado = document.getElementById('climaResultado'); 
+    var ciudadInput = document.getElementById('ciudadInput');       
+    var buscarBtn = document.getElementById('buscarClimaBtn');
 
     function displayClima(data) {
         if (!climaResultado) return; 
@@ -93,10 +92,8 @@ function setupClimaApp() {
             climaResultado.innerHTML = "<h4>Error:</h4><p>Ciudad no encontrada.</p>";
             return;
         }
-
         var tempCelsius = Math.round(data.main.temp);
         var descripcion = data.weather[0].description;
-        
         climaResultado.innerHTML = 
             "<h4>Clima en " + data.name + ":</h4>" +
             "<p>Temperatura: <strong>" + tempCelsius + "°C</strong></p>" +
@@ -106,52 +103,32 @@ function setupClimaApp() {
     async function buscarClima() {
         var ciudad = ciudadInput.value.trim();
         if (ciudad === "") return;
-        
         climaResultado.innerHTML = "<p>Buscando...</p>";
-        var proxyUrl = `/.netlify/functions/get-weather?city=${ciudad}`;
+        
+        var proxyUrl = `/api/get-weather?city=${ciudad}`;
         
         try {
             const response = await fetch(proxyUrl);
             const data = await response.json();
             displayClima(data);
         } catch (error) {
-            climaResultado.innerHTML = "<h4>Error:</h4><p>Verifica tu conexión o Netlify.</p>";
+            climaResultado.innerHTML = "<h4>Error:</h4><p>Fallo en la API del Clima.</p>";
         }
     }
-
     if (buscarBtn) buscarBtn.addEventListener('click', buscarClima);
 }
 
-const contactForm = document.querySelector('form[name="contacto-portafolio"]');
-const statusMsg = document.getElementById('form-status');
+function setupContacto() {
+    const contactForm = document.getElementById('contact-form-vercel');
+    const statusMsg = document.getElementById('form-status');
 
-if (contactForm) {
-  contactForm.addEventListener("submit", function(e) {
-    e.preventDefault(); 
-    
-    statusMsg.textContent = "Enviando mensaje...";
-    statusMsg.style.color = "var(--color-acento)";
-
-    const formData = new FormData(contactForm);
-    
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
-    })
-    .then(response => {
-      if (response.ok) {
-        statusMsg.textContent = "✅ ¡Mensaje enviado con éxito, Jefe!";
-        statusMsg.style.color = "#2ecc71";
-        contactForm.reset();
-        setTimeout(() => { statusMsg.textContent = ""; }, 5000);
-      } else {
-        throw new Error();
-      }
-    })
-    .catch(() => {
-      statusMsg.textContent = "❌ Error al enviar. Intenta de nuevo.";
-      statusMsg.style.color = "#e74c3c";
-    });
-  });
+    if (contactForm) {
+        contactForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            statusMsg.textContent = "✅ ¡Mensaje enviado con éxito, Jefe!";
+            statusMsg.style.color = "#2ecc71";
+            contactForm.reset();
+            setTimeout(() => { statusMsg.textContent = ""; }, 5000);
+        });
+    }
 }

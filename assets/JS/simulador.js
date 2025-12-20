@@ -12,7 +12,6 @@ function setupSimuladorApp() {
 
     function calcularProyeccion() {
         if (!inversionInput || !tasaInput || !mesesInput) return;
-        
         var inv = parseFloat(inversionInput.value);
         var tasa = parseFloat(tasaInput.value) / 100;
         var meses = parseInt(mesesInput.value);
@@ -24,14 +23,11 @@ function setupSimuladorApp() {
 
         var capitalFinal = inv * Math.pow(1 + tasa, meses);
         var ganancia = capitalFinal - inv;
-
         var formato = { style: 'currency', currency: 'USD' };
         
         simuladorResultado.innerHTML = 
             "<h4>✅ Cálculo:</h4>" +
-            "<p>Inversión: " + inv.toLocaleString('en-US', formato) + "</p>" +
-            "<p>Ganancia: <strong style='color: #2ecc71;'>" + ganancia.toLocaleString('en-US', formato) + "</strong></p>" +
-            "<p>Total: " + capitalFinal.toLocaleString('en-US', formato) + "</p>";
+            "<p>Total: <strong>" + capitalFinal.toLocaleString('en-US', formato) + "</strong></p>";
 
         ultimoResultado = { inv, tasa, meses, capitalFinal };
         if(guardarBtn) guardarBtn.disabled = false;
@@ -41,7 +37,6 @@ function setupSimuladorApp() {
         if (!ultimoResultado || isSaving) return;
         isSaving = true; 
         guardarBtn.textContent = "💾 Guardando...";
-        
         setTimeout(function() {
             simuladorResultado.innerHTML += "<p style='color: #3498db;'>✅ Guardado en AWS (Simulado).</p>";
             guardarBtn.textContent = "Guardar en Cloud (AWS)";
@@ -53,5 +48,4 @@ function setupSimuladorApp() {
     if (calcularBtn) calcularBtn.addEventListener('click', calcularProyeccion);
     if (guardarBtn) guardarBtn.addEventListener('click', guardarEnCloud);
 }
-
 document.addEventListener('DOMContentLoaded', setupSimuladorApp);

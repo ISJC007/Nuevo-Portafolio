@@ -21,12 +21,12 @@
     <div class="container">
         <header class="header">
             <div class="header-top">
-                <img src="assets/image/logo.png" alt="Logo de Johander Cedeño (ISJC)" class="personal-logo">
+                <img src="assets/image/logo.png" alt="Logo ISJC" class="personal-logo">
                 <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
                     <i class="fas fa-lightbulb"></i> 
                 </button>
             </div>
-            <img src="assets/image/johander-perfil.jpg" alt="Foto de Perfil de Johander" class="profile-img">
+            <img src="assets/image/johander-perfil.jpg" alt="Foto Johander" class="profile-img">
             <h1>JOHANDER CEDEÑO</h1>
             <p class="headline">JavaScript Developer | AWS Serverless Planning & API Integration</p>
         </header>
@@ -36,15 +36,12 @@
         <main>
             <section class="biography">
                 <h2>Mi Propuesta de Valor</h2>
-                <p>
-                    "Transformo tus ideas y problemas en soluciones escalables con arquitectura Serverless. Desarrollador JavaScript especializado en optimizar procesos y reducir costos de infraestructura mediante AWS y automatizaciones inteligentes."
-                </p>
+                <p>"Transformo tus ideas y problemas en soluciones escalables con arquitectura Serverless."</p>
                 <ul class="skills-list">
-                    <li>Arquitectura Cloud-Ready: Planificación de la arquitectura para persistencia de datos con AWS DynamoDB (NoSQL) y despliegue de front-end escalable en "AWS S3".</li>
-                    <li>Integración de Sistemas (API): Competencia en el consumo e integración de API REST (demostrado en la aplicación Weather) y manejo proactivo de errores (401/404).</li>
-                    <li>Desarrollo Front-End: Experiencia avanzada en JavaScript (ES6+), HTML5/CSS3 y diseño responsivo.</li>
+                    <li>Arquitectura Cloud-Ready: AWS DynamoDB y despliegue en S3.</li>
+                    <li>Integración de Sistemas: API REST y manejo proactivo de errores.</li>
+                    <li>Desarrollo Front-End: JS (ES6+), HTML5/CSS3.</li>
                 </ul>
-                <p class="commitment">Mi compromiso es la comunicación constante, la entrega rápida y la optimización de costos para el cliente.</p>
             </section>
 
             <hr class="separator">
@@ -52,11 +49,10 @@
             <section class="skills-tech">
                 <h2>Stack Tecnológico</h2>
                 <div class="skills-grid">
-                    <div class="skill-item"><i class="fab fa-js-square"></i><span>JavaScript (ES6+)</span></div>
+                    <div class="skill-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
                     <div class="skill-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
-                    <div class="skill-item"><i class="fab fa-aws"></i><span>AWS (S3/DynamoDB)</span></div>
-                    <div class="skill-item"><i class="fas fa-cloud"></i><span>Serverless / Netlify</span></div>
-                    <div class="skill-item"><i class="fab fa-git-alt"></i><span>Git & GitHub</span></div>
+                    <div class="skill-item"><i class="fab fa-aws"></i><span>AWS Cloud</span></div>
+                    <div class="skill-item"><i class="fas fa-cloud"></i><span>Serverless</span></div>
                 </div>
             </section>
 
@@ -67,72 +63,57 @@
                 <div class="proyectos-grid">
                     <div class="proyecto-card">
                         <h3>Simulador Financiero</h3>
-                        <p>Lógica de interés compuesto. Diseñado para guardar resultados en AWS DynamoDB.</p>
-                        <img src="assets/image/imagen-simulador.png" alt="Captura de pantalla del simulador financiero" class="proyecto-img">
+                        <img src="assets/image/imagen-simulador.png" class="proyecto-img">
                         <a href="#simuladorFinancieroApp" class="btn-proyecto">Ver Demo</a>
                     </div>
                     <div class="proyecto-card">
-                        <h3>App de Consulta de Clima</h3>
-                        <p>Consumo de APIs REST, manejo de errores y despliegue en "AWS S3".</p>
-                        <img src="assets/image/imagen-clima.png" alt="Captura de pantalla de la app de clima" class="proyecto-img">
+                        <h3>App de Clima</h3>
+                        <img src="assets/image/imagen-clima.png" class="proyecto-img">
                         <a href="#climaApp" class="btn-proyecto">Ver Demo</a>
-                    </div>
-                    <div class="proyecto-card video-presentacion">
-                        <h3>Presentación y Soft Skills</h3>
-                        <iframe width="100%" height="200" src="https://drive.google.com/file/d/14tUWwZPgA9RgkiBnZDqBbbdDSc_93y0D/preview" title="Video" frameborder="0" allowfullscreen></iframe>
-                        <a href="https://drive.google.com/file/d/1Jdc9bxnnIg_LF9skaJlf5GjSrNVZAPSH/view?usp=drive_link" target="_blank" class="btn-proyecto cv-link">Descargar CV</a>
                     </div>
                 </div>
             </section>
 
-            <hr class="separator">
-            
             <section class="app-section" id="simuladorFinancieroApp">
                 <h2>Simulador de Interés Compuesto</h2>
                 <div class="app-inputs">
-                    <label for="inversionInicial">Inversión Inicial ($):</label>
-                    <input type="number" id="inversionInicial" placeholder="Ej: 1000">
-                    <label for="tasaMensual">Tasa de Interés Mensual (%):</label>
-                    <input type="number" id="tasaMensual" placeholder="Ej: 3">
-                    <label for="mesesProyeccion">Meses de Proyección:</label>
-                    <input type="number" id="mesesProyeccion" placeholder="Ej: 36">
-                    <button id="calcularBtn" class="btn-proyecto">Calcular Proyección</button>
+                    <input type="number" id="inversionInicial" placeholder="Inversión Inicial $">
+                    <input type="number" id="tasaMensual" placeholder="Tasa Mensual %">
+                    <input type="number" id="mesesProyeccion" placeholder="Meses">
+                    <button id="calcularBtn" class="btn-proyecto">Calcular</button>
                 </div>
                 <div class="app-result" id="simuladorResultado"></div>
-                <button id="guardarBtn" class="btn-proyecto cv-link" disabled>Guardar en Cloud (AWS)</button>
-                <button class="btn-proyecto close-app-btn" data-target="#simuladorFinancieroApp">Cerrar Proyecto</button>
+                <button id="guardarBtn" class="btn-proyecto cv-link" disabled>Guardar en AWS</button>
+                <button class="btn-proyecto close-app-btn" data-target="#simuladorFinancieroApp">Cerrar</button>
             </section>
 
             <section class="app-section" id="climaApp">
-                <h2>App de Consulta de Clima</h2>
+                <h2>Consulta de Clima (API)</h2>
                 <div class="app-inputs">
                     <input type="text" id="ciudadInput" placeholder="Ej: Caracas">
-                    <button id="buscarClimaBtn" class="btn-proyecto">Buscar Clima</button>
+                    <button id="buscarClimaBtn" class="btn-proyecto">Buscar</button>
                 </div>
                 <div class="app-result" id="climaResultado"></div>
-                <button class="btn-proyecto close-app-btn" data-target="#climaApp">Cerrar Proyecto</button>
+                <button class="btn-proyecto close-app-btn" data-target="#climaApp">Cerrar</button>
             </section>
 
             <hr class="separator">
 
             <section class="contact-study">
-                <h2>Contacto y Redes Profesionales</h2>
+                <h2>Contacto</h2>
                 <div class="social-links-grid">
-                    <a href="https://www.linkedin.com/in/johander-cede%C3%b1o/" target="_blank" class="social-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
                     <a href="https://github.com/ISJC007" target="_blank" class="social-btn github"><i class="fab fa-github"></i> GitHub</a>
                 </div>
-                <p class="study-info">T.S.U. en Informática: Estudios enfocados en Lógica de Sistemas y Bases de Datos. (2027)</p>
             </section>
 
             <section class="cta-section">
-                <h2>¿Listo para escalar tu próximo proyecto?</h2>
-                <form name="contacto-portafolio" method="POST" data-netlify="true" class="contact-form">
-                    <input type="hidden" name="form-name" value="contacto-portafolio" />
-                    <div class="form-group"><input type="text" name="nombre" placeholder="Tu Nombre" required></div>
-                    <div class="form-group"><input type="email" name="email" placeholder="Tu Correo" required></div>
-                    <div class="form-group"><textarea name="mensaje" rows="5" placeholder="¿En qué puedo ayudarte?" required></textarea></div>
-                    <button type="submit" class="btn-cta">Enviar Mensaje</button>
-                    <div id="form-status" style="margin-top: 15px; font-weight: bold;"></div>
+                <h2>¿Hablamos?</h2>
+                <form id="contact-form-vercel" class="contact-form">
+                    <input type="text" name="nombre" placeholder="Tu Nombre" required>
+                    <input type="email" name="email" placeholder="Tu Correo" required>
+                    <textarea name="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
+                    <button type="submit" class="btn-cta">Enviar</button>
+                    <div id="form-status"></div>
                 </form>
             </section>
         </main>
