@@ -11,69 +11,47 @@ function setupSimuladorApp() {
     var ultimoResultado = null; 
 
     function calcularProyeccion() {
-        if (!inversionInput || !tasaInput || !mesesInput || !simuladorResultado) return;
+        if (!inversionInput || !tasaInput || !mesesInput) return;
         
-        var inversionInicial = parseFloat(inversionInput.value);
-        var tasaMensual = parseFloat(tasaInput.value) / 100;
+        var inv = parseFloat(inversionInput.value);
+        var tasa = parseFloat(tasaInput.value) / 100;
         var meses = parseInt(mesesInput.value);
         
-        if (isNaN(inversionInicial) || isNaN(tasaMensual) || isNaN(meses) || inversionInicial <= 0 || meses < 1) {
-            simuladorResultado.innerHTML = "<p style='color: #e74c3c;'>⚠️ Error: Introduce valores numéricos válidos y positivos.</p>";
-            if(guardarBtn) guardarBtn.disabled = true;
+        if (isNaN(inv) || isNaN(tasa) || isNaN(meses) || inv <= 0) {
+            simuladorResultado.innerHTML = "<p style='color: #e74c3c;'>⚠️ Datos inválidos.</p>";
             return;
         }
 
-        var tasaEfectiva = 1 + tasaMensual;
-        var capitalFinal = inversionInicial * Math.pow(tasaEfectiva, meses);
-        var gananciaNeta = capitalFinal - inversionInicial;
+        var capitalFinal = inv * Math.pow(1 + tasa, meses);
+        var ganancia = capitalFinal - inv;
 
-        var formatoOpciones = { style: 'currency', currency: 'USD' };
-        var capitalFinalFormateado = capitalFinal.toLocaleString('es-VE', formatoOpciones);
-        var gananciaNetaFormateada = gananciaNeta.toLocaleString('es-VE', formatoOpciones);
-        var inversionFormateada = inversionInicial.toLocaleString('es-VE', formatoOpciones);
-
+        var formato = { style: 'currency', currency: 'USD' };
+        
         simuladorResultado.innerHTML = 
-            "<h4>✅ Cálculo Completo:</h4>" +
-            "<p>Inversión Inicial: <strong>" + inversionFormateada + "</strong></p>" +
-            "<p>Ganancia Neta (" + meses + " meses): <strong style='color: #2ecc71;'>" + gananciaNetaFormateada + "</strong></p>" +
-            "<p>Capital Final Proyectado: <strong>" + capitalFinalFormateado + "</strong></p>";
+            "<h4>✅ Cálculo:</h4>" +
+            "<p>Inversión: " + inv.toLocaleString('en-US', formato) + "</p>" +
+            "<p>Ganancia: <strong style='color: #2ecc71;'>" + ganancia.toLocaleString('en-US', formato) + "</strong></p>" +
+            "<p>Total: " + capitalFinal.toLocaleString('en-US', formato) + "</p>";
 
-        ultimoResultado = {
-            fecha: new Date().toISOString(),
-            inversionInicial: inversionInicial,
-            tasaMensual: tasaMensual * 100,
-            meses: meses,
-            capitalFinal: capitalFinal
-        };
-
+        ultimoResultado = { inv, tasa, meses, capitalFinal };
         if(guardarBtn) guardarBtn.disabled = false;
     }
 
-
     function guardarEnCloud() {
-        if (!ultimoResultado || !simuladorResultado || !guardarBtn || isSaving) return;
-        
+        if (!ultimoResultado || isSaving) return;
         isSaving = true; 
-        guardarBtn.textContent = "💾 Guardando en AWS...";
-        guardarBtn.disabled = true;
-
+        guardarBtn.textContent = "💾 Guardando...";
+        
         setTimeout(function() {
-            simuladorResultado.innerHTML += "<p style='color: #3498db; margin-top: 10px;'>✅ Proyección guardada. Esta acción demuestra la conexión a DynamoDB a través de una API Gateway.</p>";
-            
+            simuladorResultado.innerHTML += "<p style='color: #3498db;'>✅ Guardado en AWS (Simulado).</p>";
             guardarBtn.textContent = "Guardar en Cloud (AWS)";
-            guardarBtn.disabled = false;
+            guardarBtn.disabled = true;
             isSaving = false; 
-            ultimoResultado = null;
-        }, 2000); 
+        }, 1500); 
     }
 
-    if (calcularBtn) {
-        calcularBtn.addEventListener('click', calcularProyeccion);
-    }
-
-    if (guardarBtn) {
-        guardarBtn.addEventListener('click', guardarEnCloud);
-    }
+    if (calcularBtn) calcularBtn.addEventListener('click', calcularProyeccion);
+    if (guardarBtn) guardarBtn.addEventListener('click', guardarEnCloud);
 }
 
 document.addEventListener('DOMContentLoaded', setupSimuladorApp);

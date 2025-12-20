@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.app-section').forEach(function(app) {
                 app.classList.remove('is-visible');
             });
-            
             targetElement.classList.add('is-visible');
-            
             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var targetElement = document.querySelector(targetId);
             if (targetElement) {
                 targetElement.classList.remove('is-visible'); 
-                
                 document.querySelector('.projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
@@ -59,22 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     setupClimaApp();
-
 }); 
 
 function getGreeting() {
     var now = new Date();
     var hour = now.getHours();
     var subject = "Jefe"; 
-    var timeOfDay = "";
-
-    if (hour >= 5 && hour < 12) {
-        timeOfDay = "días";
-    } else if (hour >= 12 && hour < 19) {
-        timeOfDay = "tardes";
-    } else {
-        timeOfDay = "noches";
-    }
+    var timeOfDay = (hour >= 5 && hour < 12) ? "días" : (hour >= 12 && hour < 19) ? "tardes" : "noches";
     return "Buenas " + timeOfDay + " " + subject + ". ¡Bienvenido/a!";
 }
 
@@ -85,90 +73,81 @@ function handleLoadingScreen() {
     if (!loadingScreen || !greetingMessage) return; 
 
     setTimeout(function() {
-        
-        var saludo = getGreeting();
-        
-        var textoSaludoPersonalizado = saludo.replace(". ¡Bienvenido/a!", "") + ".";
-
-        greetingMessage.textContent = textoSaludoPersonalizado; 
-
+        greetingMessage.textContent = getGreeting().replace(". ¡Bienvenido/a!", "."); 
         setTimeout(function() {
             loadingScreen.style.opacity = '0'; 
-            
-            setTimeout(function() {
-                loadingScreen.style.display = 'none'; 
-            }, 500); 
-
-        }, 1000); 
-
+            setTimeout(function() { loadingScreen.style.display = 'none'; }, 500); 
+        }, 1500); 
     }, 1000); 
 }
-
 window.addEventListener('load', handleLoadingScreen); 
 
 function setupClimaApp() {
-     var climaResultado = document.getElementById('clima-resultado');
-     var ciudadInput = document.getElementById('ciudad-input');
+     var climaResultado = document.getElementById('climaResultado'); 
+     var ciudadInput = document.getElementById('ciudadInput');       
      var buscarBtn = document.getElementById('buscarClimaBtn');
 
     function displayClima(data) {
         if (!climaResultado) return; 
-
         if (data.cod === "404") {
-            climaResultado.innerHTML = "<h4>Error:</h4><p>Ciudad no encontrada. Por favor, verifica el nombre.</p>";
+            climaResultado.innerHTML = "<h4>Error:</h4><p>Ciudad no encontrada.</p>";
             return;
         }
 
         var tempCelsius = Math.round(data.main.temp);
         var descripcion = data.weather[0].description;
-        var ciudad = data.name;
-        var pais = data.sys.country;
-        var humedad = data.main.humidity;
-
+        
         climaResultado.innerHTML = 
-            "<h4>Clima en " + ciudad + ", " + pais + ":</h4>" +
+            "<h4>Clima en " + data.name + ":</h4>" +
             "<p>Temperatura: <strong>" + tempCelsius + "°C</strong></p>" +
-            "<p>Condición: " + (descripcion.charAt(0).toUpperCase() + descripcion.slice(1)) + "</p>" +
-            "<p>Humedad: " + humedad + "%</p>";
+            "<p>Condición: " + (descripcion.charAt(0).toUpperCase() + descripcion.slice(1)) + "</p>";
     }
 
-    function buscarClima() {
+    async function buscarClima() {
         var ciudad = ciudadInput.value.trim();
-
-        if (ciudad === "") {
-            climaResultado.innerHTML = "<p>Por favor, introduce el nombre de una ciudad.</p>";
-            return;
-        }
+        if (ciudad === "") return;
         
-        climaResultado.innerHTML = "<p>Buscando datos del clima...</p>";
-
+        climaResultado.innerHTML = "<p>Buscando...</p>";
         var proxyUrl = `/.netlify/functions/get-weather?city=${ciudad}`;
         
-        fetch(proxyUrl)
-            .then(function(response) {
-                return response.json().then(function(data) {
-                    if (!response.ok) {
-                        displayClima(data); 
-                        return Promise.reject(new Error('Fallo en la función proxy'));
-                    }
-                    displayClima(data);
-                });
-            })
-            .catch(function(error) {
-                console.error("Error al obtener el clima:", error);
-                climaResultado.innerHTML = "<h4>Error de Conexión:</h4><p>No se pudo contactar con el servidor. Verifica tu internet o la configuración de Netlify.</p>";
-            });
+        try {
+            const response = await fetch(proxyUrl);
+            const data = await response.json();
+            displayClima(data);
+        } catch (error) {
+            climaResultado.innerHTML = "<h4>Error:</h4><p>Verifica tu conexión o Netlify.</p>";
+        }
     }
 
-    if (buscarBtn) {
-        buscarBtn.addEventListener('click', buscarClima);
-    }
+    if (buscarBtn) buscarBtn.addEventListener('click', buscarClima);
+}
 
-    if (ciudadInput) {
-        ciudadInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                buscarClima();
-            }
-        });
-    }
+const contactForm = document.querySelector('form[name="contacto-portafolio"]');
+const statusMsg = document.getElementById('form-status');
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    statusMsg.textContent = "Enviando mensaje...";
+    statusMsg.style.color = "var(--color-acento)";
+
+    const formData = new FormData(contactForm);
+    
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString(),
+    })
+    .then(() => {
+      statusMsg.textContent = "✅ ¡Mensaje enviado con éxito, Jefe!";
+      statusMsg.style.color = "#2ecc71"; 
+      contactForm.reset();
+      setTimeout(() => { statusMsg.textContent = ""; }, 5000);
+    })
+    .catch(() => {
+      statusMsg.textContent = "❌ Error al enviar. Intenta de nuevo.";
+      statusMsg.style.color = "#e74c3c"; 
+    });
+  });
 }
