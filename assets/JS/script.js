@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Manejo de apertura de proyectos
     function openProject(event) {
         event.preventDefault(); 
         var targetId = event.currentTarget.getAttribute('href'); 
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', openProject);
     });
 
+    // Manejo de cierre de proyectos
     document.querySelectorAll('.close-app-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var targetId = btn.getAttribute('data-target'); 
@@ -28,10 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Sistema de Temas (Light/Dark)
     var toggleButton = document.getElementById('theme-toggle');
     var body = document.body;
     
     function applyTheme(theme) {
+        if (!toggleButton) return;
         if (theme === 'light') {
             body.classList.add('light-mode');
             toggleButton.querySelector('i').className = 'fas fa-moon'; 
@@ -44,26 +48,31 @@ document.addEventListener('DOMContentLoaded', function() {
     var savedTheme = localStorage.getItem('theme') || 'dark';
     applyTheme(savedTheme);
 
-    toggleButton.addEventListener('click', function() {
-        if (body.classList.contains('light-mode')) {
-            applyTheme('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            applyTheme('light');
-            localStorage.setItem('theme', 'light');
-        }
-    });
+    if (toggleButton) {
+        toggleButton.addEventListener('click', function() {
+            if (body.classList.contains('light-mode')) {
+                applyTheme('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                applyTheme('light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
 
+    // Inicializar sub-aplicaciones
     setupClimaApp();
     setupContacto();
 }); 
 
+// Lógica de Saludo y Pantalla de Carga
 function getGreeting() {
     var now = new Date();
     var hour = now.getHours();
     var subject = "Jefe"; 
     var timeOfDay = (hour >= 5 && hour < 12) ? "días" : (hour >= 12 && hour < 19) ? "tardes" : "noches";
-    return "Buenas " + timeOfDay + " " + subject + ". ¡Bienvenido/a!";
+    
+    return "Buenas " + timeOfDay + " " + subject + "<br>¡Bienvenido/a!";
 }
 
 function handleLoadingScreen() {
@@ -72,7 +81,8 @@ function handleLoadingScreen() {
     if (!loadingScreen || !greetingMessage) return; 
 
     setTimeout(function() {
-        greetingMessage.textContent = getGreeting().replace(". ¡Bienvenido/a!", "."); 
+        greetingMessage.innerHTML = getGreeting(); 
+        
         setTimeout(function() {
             loadingScreen.style.opacity = '0'; 
             setTimeout(function() { loadingScreen.style.display = 'none'; }, 500); 
@@ -81,10 +91,13 @@ function handleLoadingScreen() {
 }
 window.addEventListener('load', handleLoadingScreen); 
 
+// App de Clima
 function setupClimaApp() {
     var climaResultado = document.getElementById('climaResultado'); 
     var ciudadInput = document.getElementById('ciudadInput');       
     var buscarBtn = document.getElementById('buscarClimaBtn');
+
+    if (!buscarBtn || !ciudadInput) return;
 
     function displayClima(data) {
         if (!climaResultado) return; 
@@ -115,20 +128,42 @@ function setupClimaApp() {
             climaResultado.innerHTML = "<h4>Error:</h4><p>Fallo en la API del Clima.</p>";
         }
     }
-    if (buscarBtn) buscarBtn.addEventListener('click', buscarClima);
+    buscarBtn.addEventListener('click', buscarClima);
 }
 
+// Formulario de Contacto
 function setupContacto() {
     const contactForm = document.getElementById('contact-form-vercel');
     const statusMsg = document.getElementById('form-status');
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", function(e) {
-            e.preventDefault();
-            statusMsg.textContent = "✅ ¡Mensaje enviado con éxito, Jefe!";
-            statusMsg.style.color = "#2ecc71";
-            contactForm.reset();
-            setTimeout(() => { statusMsg.textContent = ""; }, 5000);
+    if (contactForm && statusMsg) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            
+            const formData = new FormData(contactForm);
+            statusMsg.innerHTML = "⏳ Enviando mensaje...";
+            statusMsg.style.color = "var(--color-acento)";
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    statusMsg.innerHTML = "✅ ¡Mensaje enviado con éxito, Jefe!";
+                    statusMsg.style.color = "#2ecc71";
+                    contactForm.reset();
+                    setTimeout(() => { statusMsg.textContent = ""; }, 5000);
+                } else {
+                    statusMsg.innerHTML = "❌ Hubo un error en el servidor.";
+                    statusMsg.style.color = "#e74c3c";
+                }
+            } catch (error) {
+                statusMsg.innerHTML = "❌ Error de conexión.";
+                statusMsg.style.color = "#e74c3c";
+            }
         });
     }
 }

@@ -1,0 +1,4 @@
+
+git add .
+git commit -m "refactor: limpieza total de código, optimización de CSP y preparación para YouTube"
+git push origin main
