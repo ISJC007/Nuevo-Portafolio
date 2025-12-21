@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Portafolio de Johander Cedeño",
   "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
   "dependencies": {
     "node-fetch": "^2.6.7"
   }
